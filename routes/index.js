@@ -11,4 +11,20 @@ router.get('/helloworld', (req, res) => {
   res.render('helloworld', { title: 'Hello, World!' });
 });
 
+// User List Page
+router.get('/userlist', (req, res) => {
+  var db = req.db;
+  var collection = db.get("usercollection");
+  collection.find({},{},function(err,docs) {
+      res.render('userlist', {
+        "userlist" : docs
+      })
+  });
+});
+
+// New User Page
+router.get('/newuser', function(req, res) {
+  res.render('newuser', {title: 'Add New User'})
+});
+
 module.exports = router;
